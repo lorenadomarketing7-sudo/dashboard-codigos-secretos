@@ -679,11 +679,10 @@ export default function Dashboard() {
             <div style={D.hero}>
               <div style={D.heroBadge}>✦ SUA FÁBRICA DE CONTEÚDO VIRAL</div>
               <h1 style={D.heroTitle}>
-                Ganchos que <span style={{ color: "#C8973A" }}>travam o scroll.</span><br />
-                Ideias que <span style={{ color: "#C8973A" }}>geram resultado.</span>
+                Sejam Bem Vindos aos <span style={{ color: "#C8973A" }}>Códigos Secretos da Atenção</span>
               </h1>
               <p style={D.heroDesc}>
-                61 códigos prontos para você adaptar ao seu nicho e criar conteúdo que chama atenção nos 3 primeiros segundos.
+                Sua fábrica de ideias de conteúdo viral para dominar atenção e ter resultados reais.
               </p>
               <button onClick={() => setAbaAtiva("codigos")} style={D.heroCTA}>
                 Acessar os Códigos →
@@ -695,7 +694,7 @@ export default function Dashboard() {
                 { emoji: "🔐", num: "61", label: "Códigos prontos" },
                 { emoji: "🎯", num: "12", label: "Categorias" },
                 { emoji: "⚡", num: "3s", label: "Para prender atenção" },
-                { emoji: "🌍", num: "∞", label: "Nichos compatíveis" },
+                { emoji: "📝", num: "∞", label: "Roteiros infinitos" },
               ].map((item, i) => (
                 <div key={i} style={D.quickCard}>
                   <div style={{ fontSize: 28, marginBottom: 8 }}>{item.emoji}</div>
