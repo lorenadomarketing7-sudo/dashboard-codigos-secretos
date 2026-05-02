@@ -645,7 +645,7 @@ export default function Dashboard() {
       {modalCodigo && <Modal codigo={modalCodigo} onClose={() => setModalCodigo(null)} />}
 
       {/* HEADER */}
-      <header style={D.header}>
+      {abaAtiva !== "codigos" && <header style={D.header}>
         <div style={D.headerInner}>
           <div style={D.logo}>
             <span style={{ fontSize: 26 }}>🔐</span>
@@ -668,7 +668,7 @@ export default function Dashboard() {
             ))}
           </nav>
         </div>
-      </header>
+      </header>}
 
       {/* MAIN */}
       <main style={D.main}>
@@ -743,6 +743,19 @@ export default function Dashboard() {
         {/* ===== CÓDIGOS ===== */}
         {abaAtiva === "codigos" && (
           <div>
+          {/* MINI NAV */}
+          <div style={{ position: "sticky", top: 0, zIndex: 90, background: "#080808ee", backdropFilter: "blur(16px)", borderBottom: "1px solid #1e1e1e", marginBottom: 24, marginLeft: -24, marginRight: -24, padding: "10px 24px", display: "flex", alignItems: "center", gap: 12 }}>
+            <span style={{ fontSize: 18 }}>🔐</span>
+            <span style={{ fontSize: 12, fontWeight: 700, color: "#C8973A", letterSpacing: 2, flex: 1 }}>CÓDIGOS SECRETOS</span>
+            {[
+              { id: "boasvindas", label: "✦ Início" },
+              { id: "palavras",   label: "🧩 Palavras-Chave" },
+              { id: "faq",        label: "❓ Dúvidas" },
+            ].map(aba => (
+              <button key={aba.id} onClick={() => setAbaAtiva(aba.id)} style={{ background: "transparent", border: "1px solid #2a2a2a", color: "#666", padding: "6px 12px", borderRadius: 8, cursor: "pointer", fontSize: 12, fontWeight: 500 }}>{aba.label}</button>
+            ))}
+          </div>
+
             <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 24, flexWrap: "wrap" }}>
               <h2 style={{ fontSize: 26, fontWeight: 800, color: "#fff", margin: 0, flex: 1 }}>🔐 Códigos Secretos</h2>
               <input type="text" placeholder="Buscar por nome, número ou gatilho..." value={busca} onChange={e => setBusca(e.target.value)}
@@ -918,7 +931,7 @@ const D = {
 };
 
 const M = {
-  overlay: { position: "fixed", inset: 0, backgroundColor: "rgba(0,0,0,0.85)", zIndex: 100, display: "flex", alignItems: "flex-start", justifyContent: "center", padding: "24px 16px", overflowY: "auto" },
+  overlay: { position: "fixed", inset: 0, backgroundColor: "rgba(0,0,0,0.85)", zIndex: 200, display: "flex", alignItems: "flex-start", justifyContent: "center", padding: "24px 16px", overflowY: "auto" },
   modal: { backgroundColor: "#0D1627", border: "1px solid #1e293b", borderRadius: 16, width: "100%", maxWidth: 720, boxShadow: "0 24px 80px rgba(0,0,0,0.6)" },
   mHeader: { display: "flex", alignItems: "center", justifyContent: "space-between", padding: "20px 24px 16px" },
   mHeaderLeft: { display: "flex", alignItems: "center", gap: 12 },
