@@ -35,7 +35,7 @@ const publicoPerguntas = [
 ];
 
 
-const codigos = [
+const _codigos_hardcoded = [
   // ── VOL 1 ──────────────────────────────────────────────────────────────────
   {
     num:"101", nome:"A Causa da Dor", emoji:"🔍", vol:1,
@@ -606,6 +606,24 @@ function Modal({ codigo, onClose }) {
 }
 
 export default function Dashboard() {
+  const [codigos, setCodigos] = useState([]);
+  const [carregando, setCarregando] = useState(true);
+
+  useEffect(() => {
+    fetch("/api/codigos")
+      .then(r => r.json())
+      .then(d => {
+        if (Array.isArray(d)) {
+          setCodigos(d.map(c => ({
+            ...c,
+            fraseBase: c.frase_base,
+            porqueFunciona: c.por_que_funciona,
+          })));
+        }
+      })
+      .finally(() => setCarregando(false));
+  }, []);
+
   const [abaAtiva, setAbaAtiva] = useState("boasvindas");
   const [catAtiva, setCatAtiva] = useState("todos");
   const [busca, setBusca] = useState("");
@@ -639,6 +657,15 @@ export default function Dashboard() {
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
   }, []);
+
+  if (carregando) return (
+    <div style={{ minHeight: "100vh", background: "#080808", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <div style={{ textAlign: "center" }}>
+        <div style={{ fontSize: 40, marginBottom: 16 }}>🔐</div>
+        <div style={{ color: "#C8973A", fontSize: 14, letterSpacing: 2, fontFamily: "'DM Sans','Segoe UI',sans-serif" }}>Carregando códigos...</div>
+      </div>
+    </div>
+  );
 
   return (
     <div style={D.root}>
